@@ -23,9 +23,6 @@ lakes = []
 for lake in res:
     lakes.append(lake.lower().replace(',','').title().rstrip())
 
-for lake in lakes:
-  print(lake)
-
 # Get the coordinates of a lake using overpass API 
 api = overpass.API()
 
@@ -64,7 +61,25 @@ for lake in lakes:
   # Extract the coordinates print if we didnt find the lake 
   if len(coord) == 1:
     print("Did not find", lake)
+    # Try again with lake name reversed FOLLOWING CODE IS UGLY FIX LATER
+    lakefirst = ' '.join(lake.split()[::-1])
+    query = """
+    (
+      way["natural"="water"]["name"="{LookingFor}"](45.460130637921,125.15625,49.095452162535,-116.6748046875);
+      relation["natural"="water"]["name"="{LookingFor}"](45.460130637921,125.15625,49.095452162535,-116.6748046875);
+    );out center;
+    """.format(LookingFor=lakefirst)
+
+    # Query the api 
+    coord = api.get(query, responseformat="csv(name,::lon,::lat)")
+
+    # Extract the coordinates print if we didnt find the lake 
+    if len(coord) == 1:
+      print("Did not find", lakefirst)
+    else:  
+      lakescoord += [coord[1]]
   else:  
     lakescoord += [coord[1]]
 
 print(lakescoord)
+
