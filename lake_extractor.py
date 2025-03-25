@@ -1,8 +1,7 @@
 import re
 import overpass
-import geojson
+import json
 from pypdf import PdfReader
-
 
 lakes = PdfReader("regs.pdf")
 
@@ -10,14 +9,13 @@ lakes = PdfReader("regs.pdf")
 # print(len(lakes.pages))
 lakestr = ""
 
-# Extract the text from all pages about lakes 79-100
+# Extract the regulations from all pages about lakes 79-100
 for i in range(85,86):
     lakestr += lakes.pages[i].extract_text()
 
 
 # Extract all of the lake names using regex 
 res = re.findall(r'\w*\W*[ ]LAKE\s\w*|(?<=\n)LAKE\s\w*', lakestr)
-lakes = ["Lake Stevens","Banks Lake"]
 
 # Convert to lover case and remove commas and extra space at end 
 # for lake in res:
@@ -69,7 +67,8 @@ coord = api.get(query, responseformat="csv(name,::lon,::lat)")
 # JSON Format 
 # coord = api.get(query, responseformat="json")
 
-  # Extract the coordinates print if we didnt find the lake 
+
+# Extract the coordinates print if we didnt find the lake 
 #   if len(coord) == 1:
 #     print("Did not find", lake)
 #     # Try again with lake name reversed FOLLOWING CODE IS UGLY FIX LATER
@@ -94,10 +93,15 @@ coord = api.get(query, responseformat="csv(name,::lon,::lat)")
 
 # print(lakescoord)
 
-print(type(coord))
-
-#Remove duplicate blanks 
+# Remove duplicate blanks 
 coord[:] = [x for x in coord if x[1]]
+del coord[0]
 
-print(coord)
+# Convert the lon and lat to ints 
+for lake in coord:
+  lake[1] = float(lake[1])
+  lake[2] = float(lake[2])
 
+# Store all of the lakes in a json for ease of use 
+with open("lakes.json", 'w') as f:
+  json.dump(coord, f, indent=2)
