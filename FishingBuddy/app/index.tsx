@@ -20,34 +20,36 @@ function haversine(long: number, lat: number, long1: number, lat1: number) {
 
 export default function Index() {
   const [distance, setDistance] = useState(0); 
-  const [inf, setLowest] = useState(1000);
+  //const [inf, setLowest] = useState(1000);
   const [closestLake, setLake] = useState(''); 
   const lakes = require('./lakes.json');
-  const currlon = -122.0776839, currlat = 48.011960; 
+  const currlon = -120.703770, currlat = 47.835352; 
+  let index = 0; 
 
   const findClosest = () => {
+    let inf = 1000; 
     for(let i = 0; i < lakes.length; i++)
     {
       let lon2 = lakes[i][1];
       let lat2 = lakes[i][2]; 
-      if(haversine(lon2, lat2, currlon, currlat) < inf){
-        //console.log("Iteration:", i, "Distance was: ", haversine(lon2, lat2, currlon, currlat), "Lowest was: ", inf);
-        setDistance(haversine(lon2, lat2, currlon, currlat));
-        setLowest(haversine(lon2, lat2, currlon, currlat));
-        setLake(lakes[i][0]);
+      let distance = haversine(lon2, lat2, currlon, currlat); 
+      if(distance < inf){
+        inf = distance; 
+        index = i; 
       };
     }
   };
 
   useEffect(() => {
     findClosest();
+    setLake(lakes[index][0]); 
   }, [closestLake]); 
 
 
   return (
     <View style={styles.container}>
       <Button title="Click Here" onPress={findClosest}/>
-      <Text style={styles.text}>Home screen {inf} {closestLake}</Text>
+      <Text style={styles.text}>{closestLake}</Text>
     </View>
   );
 }
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
+    fontSize: 35,
   },
 });
 
