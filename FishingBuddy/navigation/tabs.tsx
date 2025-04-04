@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button, Image } from 'react-native';
 
 import HomeScreen from '../Screens/Home'; 
 import WeatherScreen from "@/Screens/Weather";
+import WhereToGo from '../Screens/WhereToGo'; 
 
 const Tab = createBottomTabNavigator(); 
 
@@ -46,6 +47,22 @@ const Tabs = () => {
                     <View style={{alignItems:'center', justifyContent:'center', top:15}}>
                         <Image 
                             source={require('../assets/icons/cloud-wind-icon.png')}
+                            resizeMode="contain"
+                            style={{
+                                width:30, 
+                                height: 30,
+                                tintColor: focused ? 'blue' : 'black'
+                            }} />
+                        
+                    </View>
+                ),}}/>
+
+                <Tab.Screen name="WhereToGo" component={WhereToGo} options={{ 
+                headerShown: false, 
+                tabBarIcon: ({focused}) => (
+                    <View style={{alignItems:'center', justifyContent:'center', top:15}}>
+                        <Image 
+                            source={require('../assets/icons/to-go.png')}
                             resizeMode="contain"
                             style={{
                                 width:30, 
