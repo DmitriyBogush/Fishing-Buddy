@@ -24,54 +24,54 @@ const Tabs = () => {
                 height: 90,
             }
         }}
-        >
-            <Tab.Screen name="Home" component={HomeScreen} options={{ 
-                headerShown: false, 
-                tabBarIcon: ({focused}) => (
-                    <View style={{alignItems:'center', justifyContent:'center', top:15}}>
-                        <Image 
-                            source={require('../assets/icons/house-icon.png')}
-                            resizeMode="contain"
-                            style={{
-                                width:30, 
-                                height: 30,
-                                tintColor: focused ? 'blue' : 'black'
-                            }} />
-                        
-                    </View>
-                ),}}/>
-            
-            <Tab.Screen name="Weather" component={WeatherScreen} options={{ 
-                headerShown: false, 
-                tabBarIcon: ({focused}) => (
-                    <View style={{alignItems:'center', justifyContent:'center', top:15}}>
-                        <Image 
-                            source={require('../assets/icons/cloud-wind-icon.png')}
-                            resizeMode="contain"
-                            style={{
-                                width:30, 
-                                height: 30,
-                                tintColor: focused ? 'blue' : 'black'
-                            }} />
-                        
-                    </View>
-                ),}}/>
+        >            
+        <Tab.Screen name="Weather" component={WeatherScreen} options={{ 
+            headerShown: false, 
+            tabBarIcon: ({focused}) => (
+                <View style={{alignItems:'center', justifyContent:'center', top:15}}>
+                    <Image 
+                        source={require('../assets/icons/cloud-wind-icon.png')}
+                        resizeMode="contain"
+                        style={{
+                            width:30, 
+                            height: 30,
+                            tintColor: focused ? 'blue' : 'black'
+                        }} />
+                    
+                </View>
+            ),}}/>
+        
+        <Tab.Screen name="Home" component={HomeScreen} options={{ 
+            headerShown: false, 
+            tabBarIcon: ({focused}) => (
+                <View style={{alignItems:'center', justifyContent:'center', top:15}}>
+                    <Image 
+                        source={require('../assets/icons/house-icon.png')}
+                        resizeMode="contain"
+                        style={{
+                            width:30, 
+                            height: 30,
+                            tintColor: focused ? 'blue' : 'black'
+                        }} 
+                    />
+                </View>
+            ),}}/>
 
-                <Tab.Screen name="WhereToGo" component={WhereToGo} options={{ 
-                headerShown: false, 
-                tabBarIcon: ({focused}) => (
-                    <View style={{alignItems:'center', justifyContent:'center', top:15}}>
-                        <Image 
-                            source={require('../assets/icons/to-go.png')}
-                            resizeMode="contain"
-                            style={{
-                                width:30, 
-                                height: 30,
-                                tintColor: focused ? 'blue' : 'black'
-                            }} />
-                        
-                    </View>
-                ),}}/>
+        <Tab.Screen name="WhereToGo" component={WhereToGo} options={{ 
+            headerShown: false, 
+            tabBarIcon: ({focused}) => (
+                <View style={{alignItems:'center', justifyContent:'center', top:15}}>
+                    <Image 
+                        source={require('../assets/icons/to-go.png')}
+                        resizeMode="contain"
+                        style={{
+                            width:30, 
+                            height: 30,
+                            tintColor: focused ? 'blue' : 'black'
+                        }} />
+                    
+                </View>
+            ),}}/>
         </Tab.Navigator>
     )
 }

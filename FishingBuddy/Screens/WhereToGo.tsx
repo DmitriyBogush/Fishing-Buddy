@@ -4,41 +4,41 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeatherScreen = ({}) => {
-    const [input, setInput] = useState(''); 
- 
-    const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('lake');
-          if (value !== null) {
-            setInput(value); 
-          }
-        } catch (e) {
-          alert("Failed");
+  const [input, setInput] = useState(''); 
+
+  const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('lake');
+        if (value !== null) {
+          setInput(value); 
         }
-    };
+      } catch (e) {
+        alert("Failed to get lake name WheretoGo.tsx");
+      }
+  };
 
-    useEffect(() => {
-        getData();
-    }, [input]); 
+  useEffect(() => {
+    getData();
+  }, [input]); 
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}> 10 Bodies of water to go fishing {input}</Text>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}> 10 Bodies of water to go fishing {input}</Text>
+    </View>
+  )
 }
 
 export default WeatherScreen; 
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#ffffff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    text: {
-      color: 'black',
-      fontSize: 35,
-    },
-  });
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'black',
+    fontSize: 35,
+  },
+});
