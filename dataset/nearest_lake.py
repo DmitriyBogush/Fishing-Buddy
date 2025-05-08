@@ -14,7 +14,7 @@ def haversine(long, lat, long1, lat1):
 with open("lakes.json", 'r') as f: 
   lakes = json.load(f)
 
-fishing = [-119.328858, 47.165648]
+fishing = [0,0 ]
 
 #Iterate through each lake and find the closest MIGHT NOT BE EFFICIENT FIX LATER 
 closestLake = ''
